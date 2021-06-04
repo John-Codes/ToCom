@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="ToCom.Views.AboutPage"
+             xmlns:vm="clr-namespace:ToCom.ViewModels"
+             Title="{Binding Title}">
+    
+    <ContentPage.BindingContext>
+        <vm:AboutViewModel />
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+            <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArgsConverter"/>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ListView ItemsSource="{Binding Foods}">
+
+        <ListView.Behaviors>
+            <xct:EventToCommandBehavior
+            EventName="ItemSelected" Command="{Binding SelectedCommand}"
+            EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"/>
+
+
+        </ListView.Behaviors>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell Text="{Binding Name}" Detail="{Binding Price}"></TextCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+
+    </ListView>
+
+  
+
+</ContentPage>
